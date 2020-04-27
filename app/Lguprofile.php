@@ -7,14 +7,26 @@ use App\Geocode;
 
 class Lguprofile extends Model
 {
-   protected $fillable = ['geocode_id','sitios_in_bgy','classification','landarea','indigenous_group','unitNo','floorNo','phaseNo','blockNo','lotNo','houseno','street','sitio'];
-} 
-{
+	/**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'lguprofiles';
+	
+   protected $fillable = ['geocode_id','district','sitios_in_bgy','classification','landarea','indigenous_group'];
   
-
-  
- /*  public function geocode()
+  /**
+     * Get the geocode that owns the lguprofile.
+     */
+	 
+	public function geocode()
     {
-        return $this->belongsTo('App\Geocode');
-    }*/
+        return $this->belongsTo('App\Gocode');
+    }
+	
+	public function add()
+	{
+		//
+	}
 }

@@ -2,8 +2,6 @@
 
 //use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Request;
-use App\Geocode;
-use App\Lguprofile;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +24,43 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
+/*PSGC*/
+
+Route::get('/psgc','PsgcsController@index');
+
+/*PSGC*/
+
+Route::get('/regions','RegionsController@index');
+
+
+
+/*  Geocodes */
+
+Route::get('/geocodes', 'GeocodesController@index');
+//Route::get('/geocodes','GeocodesController@show');
+Route::get('/geocodes/create','GeocodesController@create')->name('geocodes.create');
+Route::post('/geocodes','GeocodesController@store')->name('geocodes.store');
+Route::get('/geocodes/{geocode}','GeocodesController@show');
+Route::get('/geocodes/{id}/edit','GeocodesController@edit')->name('geocodes.edit');
+Route::get('/geocodes/{id}/delete','GeocodesController@destroy')->name('geocodes.destroy');
+
+/*  LGU Profile */
+
+Route::get('/lguprofiles', 'LguprofilesController@index');
+Route::get('/lguprofiles/create','LguprofilesController@create')->name('lguprofiles.create');
+Route::post('/lguprofiles/create','LguprofilesController@store')->name('lguprofiles.store');
+Route::get('/search','LguprofileController@search')->name('search.search');
+
+
+Route::get('/lguprofiles/{id}/edit','LguprofileController@edit')->name('lguprofiles.edit');
+Route::get('/lguprofiles/{id}/delete','LguprofileController@destroy')->name('lguprofiles.destroy');
+
+
+Route::post('/Lguprofiles/update','LguprofileController@update')->name('lguprofiles.update');
+
+
+//Route::post('/population/update','GeocodeController@update')->name('geocodes.update');
+
 /*User Manager*/
 
 Route::get('/usermanagement','UsermanagementController@index');
@@ -34,35 +69,17 @@ Route::get('/usermanagement','UsermanagementController@index');
 
 Route::get('/search','UsermanagementController@search')->name('search.search');
 
-/*  LGU Profile */
-
-Route::get('/lguprofiles', 'LguprofileController@index')->name('lguprofiles.index');
-Route::get('/lguprofiles/create','LguprofileController@create')->name('lguprofiles.create');
-Route::get('/search','LguprofileController@search')->name('search.search');
 
 
-Route::get('/lguprofiles/{id}/edit','LguprofileController@edit')->name('lguprofiles.edit');
-Route::get('/lguprofiles/{id}/delete','LguprofileController@destroy')->name('lguprofiles.destroy');
+/*Enforce change password upon first time login
 
-Route::post('/create','LguprofileController@store')->name('lguprofiles.store');
-Route::post('/Lguprofiles/update','LguprofileController@update')->name('lguprofiles.update');
+Route::get('/changePassword','HomeController@showChangePasswordForm');
 
-/*  Geocodes */
+Route::post('/changePassword','HomeController@changePassword')->name('changePassword');*/
 
-Route::post ( '/search', function () {
-	$q = Request::get ( 'q' );
-	$geocode = Geocode::where ( 'barangay', 'LIKE', '%' . $q . '%' )->orWhere('municipal','LIKE','%'.$q.'%')->get ();
-		if (count ( $geocode ) > 0)
-			return view ( 'geocodes.index' )->withDetails ( $geocode )->withQuery ( $q );
-		else
-			return view ( 'geocodes.index' )->withMessage ( 'No Details found. Try to search again !' );
 
-});
 
-Route::get('/geocodes', 'GeocodeController@index')->name('geocodes.index');
-Route::get('/geocodes/{id}/edit','GeocodeController@edit')->name('geocodes.edit');
-Route::get('/geocodes/{id}/delete','GeocodeController@destroy')->name('geocodes.destroy');
-Route::get('/geocodes/create','GeocodeController@create')->name('geocodes.create');
-Route::post('/geocodes/create','GeocodeController@store')->name('geocodes.store');
-Route::post('/population/update','GeocodeController@update')->name('geocodes.update');
+
+
+
 

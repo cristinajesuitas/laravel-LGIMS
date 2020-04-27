@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\lguprofile;
+use App\Lguprofile;
 use App\Geocode;
+
 
 
 class LguprofileController extends Controller
@@ -20,9 +21,28 @@ class LguprofileController extends Controller
     public function index()
     {
         //Show all lguprofiles from the database and return to view
-        $lguprofiles = DB::table('lguprofiles')->get();
+
+        $lguprofiles = Lguprofile::all();
 		
-        return view('lguprofiles.index',['lguprofiles'=>$lguprofiles]);
+      /*foreach ($lguprofiles as $row_lguprofile) {
+			var_dump ($row_lguprofile->geocode->barangay);
+			var_dump ($row_lguprofile->district);
+			echo $lguprofile->sitios_of_bgy;
+			echo $lguprofile->classification;
+			echo $lguprofile->landarea;
+			echo $lguprofile->indigenous_group;
+			echo $lguprofile->unitNo;
+			echo $lguprofile->floorNo;
+			echo $lguprofile->phaseNo;
+			echo $lguprofile->blockNo;
+			echo $lguprofile->lotNo;
+			echo $lguprofile->houseno;
+			echo $lguprofile->street;
+			echo $lguprofile->sitio;
+			echo $lguprofile->munLogo;
+			echo $lguprofile->bgyLogo;
+	   }*/
+		return view('lguprofiles.index',compact('lguprofiles'));
     }
 	
 	/**
@@ -34,20 +54,27 @@ class LguprofileController extends Controller
     {
         //Return view to create lguprofile
 		
+		
         //$geocodes = Geocode::all();
 		
 		return view('lguprofiles.create');
     }
-	/**Search records from database
-	*
+		//Get Barangay List
 	
-	public function search(Request $request)
-	{
-		$search = $request->get('search');
-		$geocodes = DB::table('geocodes')->where('barangay');
-		return view('create',['geocodes'=> $geocodes]);
-	}*/
-    /**
+	public function getGeocodes()
+		{
+			
+		$geocode = App\Geocode::pluck('barangay');
+		
+		foreach ($geocodes as $geocode)
+			{
+				echo $geocode->barangay;
+			}
+			
+			return view('lguprofiles.create',compact('geocodes',$geocodes));
+		}
+	
+	/**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -61,22 +88,26 @@ class LguprofileController extends Controller
         $lguprofile = new Lguprofile();
 		//input method is used to get the value of input with its
         //name specified
-        $lguprofile->geocode_id = $request->input('geocode_id');
-		$lguprofile->district = $request->input('district'); 
-        $lguprofile->sitios_in_bgy = $request->input('sitios_in_bgy');
-        $lguprofile->classification = $request->input('classification');
-        $lguprofile->landarea = $request->input('landarea');
-		$lguprofile->indigenous_group = $request->input('indigenous_group');
-		$lguprofile->unitNo = $request->input('unitNo'); 
-		$lguprofile->floorNo = $request->input('floorNo');
-		$lguprofile->phaseNo = $request->input('phaseNo');
-		$lguprofile->blockNo = $request->input('blockNo');
-		$lguprofile->lotNo = $request->input('lotNo');
-		$lguprofile->houseno = $request->input('houseno');
-		$lguprofile->street = $request->input('street');
-		$lguprofile->sitio = $request->input('sitio');
-        $lguprofile->save(); //persist the data
-        return redirect()->route('lguprofiles.index')->with('info','lguprofile Added Successfully');
+        $lguprofile->geocode_id = $request->geocode_id;
+		$lguprofile->district = $request->district;
+		$lguprofile->sitios_in_bgy = $request->sitios_in_bgy;
+		$lguprofile->classification = $request->classification;
+		$lguprofile->landarea = $request->landarea;
+		$lguprofile->indigenous_group = $request->indigenous_group;
+		$lguprofile->unitNo = $request->unitNo;
+		$lguprofile->floorNo = $request->floorNo;
+		$lguprofile->phaseNo = $request->phaseNo;
+		$lguprofile->blockNo = $request->blockNo;
+		$lguprofile->lotNo = $request->lotNo;
+		$lguprofile->houseno = $request->houseno;
+		$lguprofile->street = $request->street;
+		$lguprofile->sitio = $request->sitio;
+		$lguprofile->munLogo=$request->munLogo;
+		$lguprofile->bgyLogo=$request->bgyLogo;
+				
+        $lguprofile->save(); 
+		//persist the data
+        return redirect()->route('lguprofiles.index')->with('info','LGU Profile Added Successfully!');
     }
     /**
      * Show the form for editing the specified resource.
@@ -129,7 +160,7 @@ class LguprofileController extends Controller
      * Search page of the resource.
      *
      * @return \Illuminate\Http\Response
-     */
+     
 	
 	public function search(Request $request)
 	{
@@ -147,6 +178,21 @@ class LguprofileController extends Controller
 		}
 	}
 	
+	/*functions to get data
+	public function 
+	{
+		$this->lguprofile = Lguprofile::with('lguprofilegeocode')->get();
+			
+	}*/
+	
+	// function for ending data to view 
+    public function tesview() {
+
+    return view('view whic you wanna send your data', 
+         [
+           $lguprofile_details => $this->lguprofile
+         ]);
+    }
 	
 	public function upload()
 	{

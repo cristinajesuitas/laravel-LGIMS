@@ -1,0 +1,2 @@
+ 
+ <p class="h6 "><small>©2020 <img src="images/imslogo.png" class="figure-img img-fluid rounded" width="50" height=auto class="d-inline-block align-top" alt=""> Information Management Systems (IMS) Office, Municipality of Tanay</small></p>

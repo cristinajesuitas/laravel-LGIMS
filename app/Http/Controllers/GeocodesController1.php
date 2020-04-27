@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Geocode;
 
-class GeocodeController extends Controller
+class GeocodesController extends Controller
 {
         /**
      * Display a listing of the resource.
@@ -15,9 +15,18 @@ class GeocodeController extends Controller
     public function index()
     {
         //Show all geocodes from the database and return to view
-        $geocodes = Geocode::all()->toArray();
-        return view('geocodes.index',compact('geocodes'));
+		
+        $geocodes = Geocode::all();
+		
+		return view('geocodes.index',compact('geocodes'));
     }
+	/*show all the resources in a table*/
+	
+		public function show(Geocode $geocode)
+	{
+				
+		return view('geocodes.show', compact('geocode'));
+	}
     /**
      * Show the form for creating a new resource.
      *
@@ -28,6 +37,8 @@ class GeocodeController extends Controller
         //Return view to create geocode
         return view('geocodes.create');
     }
+	
+
     /**
      * Store a newly created resource in storage.
      *
@@ -36,6 +47,7 @@ class GeocodeController extends Controller
      */
     public function store(Request $request)
     {
+		
         //Persist the geocode in the database
         //form data is available in the request object
         $geocode = new Geocode();
@@ -43,7 +55,7 @@ class GeocodeController extends Controller
         //name specified
         $geocode->code = $request->input('code');
         $geocode->region = $request->input('region');
-        $geocode->province = $request->input('region');
+        $geocode->province = $request->input('province');
         $geocode->municipal = $request->input('municipal');
 		$geocode->barangay = $request->input('barangay');
 		$geocode->zipcode = $request->input('zipcode');
@@ -98,4 +110,20 @@ class GeocodeController extends Controller
         return redirect()->route('geocodes.index');
     }
 	
+	protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'code' => ['required', 'string', 'max:9','unique:geocodes','regex:/^[0-9]{9}$'],
+			'region' => ['required', 'string', 'max:255'],
+			'province' => ['required', 'string', 'max:255','not_regex:'/^[0]+\b/m'],
+			'municipal' => ['required', 'string', 'max:255','regex:'/^[a-zA-Z ]+\b/m'],
+            'barangay' => ['required', 'string', 'max:255','regex:'/^[a-zA-Z ]+\b/m'],
+			'zipcode' => ['required', 'string', 'max:4','regex:/^[1-9][0-9]{3}$/m'],
+		 ]);
+    }
+	/*
+	public function checkPSGC();
+	{
+		
+	}*/
 }

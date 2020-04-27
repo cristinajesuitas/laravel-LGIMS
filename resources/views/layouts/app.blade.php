@@ -11,7 +11,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 	
 	
-	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 
 
     <!-- Scripts -->
@@ -22,15 +22,27 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    
+<style>
+body { 
+    padding-top: 75px; 
+	margin-bottom: 65px;
+}	
+.tab-pane{
+	padding-top: 10px; 
+	margin-bottom: 50px;
+	
+}	
+
+
+<</style>    
 </head>
 <body>
     <div id="app">
 	@if(Auth::check())
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top ">
+            <div class="container ">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                   <img src="images/lgimsicon.png" class="figure-img img-fluid rounded" width="75" height=auto class="d-inline-block align-top" alt="">
+                   <img src="images/lgimsicon.png" class="figure-img img-fluid rounded" width="50" height=auto class="d-inline-block align-top" alt="">
                 </a>
                 
                     
@@ -42,6 +54,7 @@
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Setup</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<a class="dropdown-item" href="http://lgims.katbayani.tanay.gov.ph/lguprofiles">LGU Profiles</a>
+						<a class="dropdown-item" href="http://lgims.katbayani.tanay.gov.ph/psgc">Philippine Standard Geographic Code</a>
 						<a class="dropdown-item" href="http://lgims.katbayani.tanay.gov.ph/usermanagement">User Management</a>
 						<a class="dropdown-item" href="#">Officials</a>
 						<a class="dropdown-item" href="#">Rate of Taxes</a>
@@ -152,13 +165,19 @@
             @yield('content')
         </main>
     </div>
-	 <script src="{{ asset('js/app.js') }}" defer></script>	
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-	<script src="/js//bootstrap.min.js"></script>
 	
+<div class="container-expand-md fixed-bottom bg-light text-dark">
 
+    <footer class="text-center">
+		@include('includes.footer')
+	</footer>
 
+</div>
+
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	
 </body>
 
 </html>

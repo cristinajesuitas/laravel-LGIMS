@@ -16,4 +16,11 @@ class Geocode extends Model
     {
         return $this->hasOne('App\Lguprofile');
     }
+	// $lguprofile -> geocode
+	
+	public function addLguprofile ($barangay)
+	{
+		Lguprofile::create([
+			'geocode_id' => $this->id]);
+	}
 }
