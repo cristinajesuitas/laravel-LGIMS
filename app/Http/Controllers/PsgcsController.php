@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Region;
 
+
 class PsgcsController extends Controller
 {
     /**
@@ -16,7 +17,7 @@ class PsgcsController extends Controller
     {
         // /psgc
 		
-		$regions = Region::all();
+		//$regions = Region::all();
 		
 		return view('psgc.index');
     }

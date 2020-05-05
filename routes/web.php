@@ -12,6 +12,16 @@ use Illuminate\Support\Facades\Request;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
+|   // GET is for showing all or specific resource may that for creating a new or
+            editing existing resource (
+                GET /articles;
+                GET /articles/:id;
+                GET /articles/create;
+            )
+|   // POST is for storing a new or existing resource (POST /articles;)
+|   // PUT is for updating an specific resource (PUT /articles/:id;)
+|   // DELETE is for deleting an specidic resource (DELETE /articles/:id;)
+{{ $error->has('title') ? true-value : false-value }}
 */
 
 Route::get('/', function () {
@@ -22,64 +32,14 @@ Auth::routes(['register' => true]);
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::get('home', 'HomeController@index');
 
 /*PSGC*/
 
-Route::get('/psgc','PsgcsController@index');
-
-/*PSGC*/
-
-Route::get('/regions','RegionsController@index');
-
-
-
-/*  Geocodes */
-
-Route::get('/geocodes', 'GeocodesController@index');
-//Route::get('/geocodes','GeocodesController@show');
-Route::get('/geocodes/create','GeocodesController@create')->name('geocodes.create');
-Route::post('/geocodes','GeocodesController@store')->name('geocodes.store');
-Route::get('/geocodes/{geocode}','GeocodesController@show');
-Route::get('/geocodes/{id}/edit','GeocodesController@edit')->name('geocodes.edit');
-Route::get('/geocodes/{id}/delete','GeocodesController@destroy')->name('geocodes.destroy');
-
-/*  LGU Profile */
-
-Route::get('/lguprofiles', 'LguprofilesController@index');
-Route::get('/lguprofiles/create','LguprofilesController@create')->name('lguprofiles.create');
-Route::post('/lguprofiles/create','LguprofilesController@store')->name('lguprofiles.store');
-Route::get('/search','LguprofileController@search')->name('search.search');
-
-
-Route::get('/lguprofiles/{id}/edit','LguprofileController@edit')->name('lguprofiles.edit');
-Route::get('/lguprofiles/{id}/delete','LguprofileController@destroy')->name('lguprofiles.destroy');
-
-
-Route::post('/Lguprofiles/update','LguprofileController@update')->name('lguprofiles.update');
-
-
-//Route::post('/population/update','GeocodeController@update')->name('geocodes.update');
-
-/*User Manager*/
-
-Route::get('/usermanagement','UsermanagementController@index');
-
-//Route::get('/','UsermanagementController@index');
-
-Route::get('/search','UsermanagementController@search')->name('search.search');
-
-
-
-/*Enforce change password upon first time login
-
-Route::get('/changePassword','HomeController@showChangePasswordForm');
-
-Route::post('/changePassword','HomeController@changePassword')->name('changePassword');*/
-
-
-
-
-
+Route::get('psgc', 'RegionsController@index')->name('regions.index');
+Route::post('psgc','RegionsController@store');
+//Route::put('psgc','RegionsController@update');
+//Route::get('psgc/{region}','RegionsController@show');
+//Route::get('psgc','RegionsController@create');
 
 

@@ -12,23 +12,40 @@ class RegionsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
          // /psgc
 		
 		$regions = Region::all();
 		
-		return view('psgc.index',compact('regions'));
+		return view('psgc.index',['regions' => $regions ]);
     }
 
-    /**
+         /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
+
     public function create()
     {
-        //
+        // Shows a view to create a new resource
+
+                 
+
+    }
+
+      /**
+     * Display the specified resource.
+     *
+     * @param  \App\Region  $region
+     * @return \Illuminate\Http\Response
+     */
+
+    public function show(Region $region)
+    {
+        return view('regions.show',['region'=>$region]);
     }
 
     /**
@@ -37,43 +54,45 @@ class RegionsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {
         // POST /psgc/regions
-		/* create a new geocode using the request data
+        /* create a new geocode using the request data
+        */
 		
-		$this->validate(request(),[
-			'name'		=>	['required','max:255','regex:/^\D+$/','unique:regions'],
-			'psgCode' 	=>	['required',,'regex:/\d{9}/','unique:regions'],
-			]);
-			
-		Region::create(request(['name','psgCode']));
+        
+
+        If ($this->fails())
+        {
+            return response()->json(['errors'=>$this->errors()->all()]);
+        }
+       
+        Region::create($this->validateRegion());
+
+        return response()->json(['success'=>'Data is successfully added']);
+    }
+        
+        //return redirect('psgc');
+    
 		
 		// and then redirect to the home page
 		
-		return redirect('/geocodes');*/
+       
+        
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Region  $region
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Region $region)
-    {
-        //
-    }
-
+ 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Region  $region
      * @return \Illuminate\Http\Response
      */
-    public function edit(Region $region)
+
+    /* public function edit(Region $region)
     {
-        //
+         return redirect('psgc');
     }
 
     /**
@@ -83,9 +102,20 @@ class RegionsController extends Controller
      * @param  \App\Region  $region
      * @return \Illuminate\Http\Response
      */
+
     public function update(Request $request, Region $region)
     {
-        //
+        Region::update($this->validateRegion());
+        
+        return redirect('psgc');
+    }
+
+    public function validateRegion()
+    {
+        return request()->validate([
+			'name'		=>	['required','max:255','regex:/\D+$/','unique:regions'],
+			'psgCode' 	=>	['required','regex:/\d{9}/','unique:regions']
+			]);
     }
 
     /**

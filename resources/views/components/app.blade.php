@@ -39,7 +39,7 @@ body {
 <body>
     <div id="app">
 	@if(Auth::check())
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top ">
+        <nav class="navbar navbar-expand-md navbar-light bg-info shadow-sm fixed-top ">
             <div class="container ">
                 <a class="navbar-brand" href="{{ url('/') }}">
                    <img src="images/lgimsicon.png" class="figure-img img-fluid rounded" width="50" height=auto class="d-inline-block align-top" alt="">
@@ -51,32 +51,32 @@ body {
 				   <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
 						<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Setup</a>
+				<a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Setup</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="http://lgims.katbayani.tanay.gov.ph/lguprofiles">LGU Profiles</a>
-						<a class="dropdown-item" href="http://lgims.katbayani.tanay.gov.ph/psgc">Philippine Standard Geographic Code</a>
-						<a class="dropdown-item" href="http://lgims.katbayani.tanay.gov.ph/usermanagement">User Management</a>
+						<a class="dropdown-item" href="/lguprofiles">LGU Profiles</a>
+						<a class="dropdown-item" href="/psgc">Philippine Standard Geographic Code</a>
+						<a class="dropdown-item" href="/usermanagement">User Management</a>
 						<a class="dropdown-item" href="#">Officials</a>
 						<a class="dropdown-item" href="#">Rate of Taxes</a>
 					</div>
 			</li>
 			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Population</a>
+				<a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Population</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="http://lgims.katbayani.tanay.gov.ph/inhabitants">Households</a>
+						<a class="dropdown-item" href="/inhabitants">Households</a>
 						<a class="dropdown-item" href="#">Institutional Populations</a>
 						<a class="dropdown-item" href="#">Transients</a>
 					</div>
 			</li>
 			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Housing</a>
+				<a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Housing</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<a class="dropdown-item" href="#">Household Housing</a>
 						<a class="dropdown-item" href="#">Institution Housing</a>
 					</div>
 			</li>
 			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Services</a>
+				<a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Services</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<a class="dropdown-item" href="#">Permits</a>
 						<a class="dropdown-item" href="#">Clearances</a>
@@ -87,7 +87,7 @@ body {
 					</div>
 			</li>
 			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Legislature</a>
+				<a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Legislature</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<a class="dropdown-item" href="#">Attendance</a>
 						<a class="dropdown-item" href="#">Committee Hearings</a>
@@ -97,7 +97,7 @@ body {
 					</div>
 			</li>
 			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reports</a>
+				<a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reports</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<a class="dropdown-item" href="#">Barangay Profile</a>
 						<a class="dropdown-item" href="#">Registry of Barangay Inhabitants</a>
@@ -106,7 +106,7 @@ body {
 			</li>
 			
 			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Utility</a>
+				<a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Utility</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<a class="dropdown-item" href="#">Database Backup</a>
 						<a class="dropdown-item" href="#">Database Restore</a>
@@ -162,7 +162,7 @@ body {
         </nav>
 
         <main class="py-4">
-            @yield('content')
+            {{ $slot }}
         </main>
     </div>
 	
@@ -177,6 +177,7 @@ body {
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	
 	
 </body>
 

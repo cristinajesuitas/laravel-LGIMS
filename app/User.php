@@ -40,9 +40,14 @@ class User extends Authenticatable
      * The model's default values for attributes.
      *
      * @var array
-     */
+    
     protected $attributes = [
         'status' => 1, //1 means active - status
 		'activity' => 0, //0 means no activity yet
     ];
+
+    public function initialLog()
+    {
+        $this->
+    }*/
 }

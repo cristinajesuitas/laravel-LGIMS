@@ -22,8 +22,8 @@ class CreateUsersTable extends Migration
 			$table->string('role',10);
             $table->string('email')->unique();
 			$table->timestamp('email_verified_at')->nullable();
-			$table->boolean('status')->default(1);
-			$table->boolean('activity')->default(0);
+			$table->boolean('status')->default(true);
+			$table->boolean('loggedIn')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

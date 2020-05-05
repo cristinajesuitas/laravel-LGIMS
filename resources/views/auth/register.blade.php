@@ -1,4 +1,4 @@
-@extends('auth.login')
+<x-app>
 
 @section('content')
 
@@ -136,4 +136,4 @@
 </div>
 
 
-@endsection
+</x-app>

@@ -1,27 +1,16 @@
-@extends ('layouts.app')
-@section('title','Regions')
 
-@section('content')
 
-<div class="container">
-	
-	@include('pscg.psgcNav')
 
-	<div class="container" sytle="padding-top:100px">
-						
-		hello world			
-	
-		
-												
-					<table class="table table-striped">
+									
+					<table class="table table-striped table-sm">
 					
-						<thead class="thead-dark">
+						<thead class="thead-light text-center">
 						
 							<tr>
-							  <th>ID</th>
-							  <th>Region</th>
-							  <th>PSG Code</th>
-							  <th>Action</th>
+								<th>No</th>
+								<th>Region</th>
+								<th>PSG Code</th>
+								<th>Action</th>
 							</tr>
 						
 						</thead>
@@ -30,19 +19,18 @@
 						
 							@foreach($regions as $region)
 							
-							<tr class = "text-center">
-								<td>{{ $region->id }}</td>
-								<td>{{ $region->name }}</td>
-								<td>{{ $region->psgCode }}</td>
-								<td><a href="{{route('geocodes.edit',$geocode['id'])}}" class = "btn btn-info">Edit</a>
-								<a href="{{route('geocodes.destroy',$geocode['id'])}}" class = "btn btn-danger">Delete</a>
-							</tr>
-						@endforeach
+								<tr class = "text-center">
+									<td>{{ $region->id }}</td>
+									<td>{{ $region->name }}</td>
+									<td>{{ $region->psgCode }}</td>
+									<td>@include('regions.edit')</td>
+								</tr>
+
+							@endforeach
 						</tbody>
+
 					</table>
 				
-				</div>
-	</div
-</div>
+			
+
 				
-@endsection
