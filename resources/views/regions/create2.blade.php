@@ -82,7 +82,7 @@
 <script>
 
     function openModal(){
-        $('#addRegionForm').modal('show')
+        $('#addRegionModal').modal('show')
     }
 
     function storeData(){
@@ -90,13 +90,15 @@
         var name = $('#name').val();
         var psgCode = $('#psgCode').val();
 
-    $('#name-error').addClass('d-none');
-    $('#psgCode-error').addClass('d-none');
+    $('#nameError').addClass('d-none');
+    $('#psgCodeError').addClass('d-none');
 
         $.ajax({
-            url:'psgc',
+            url:'regions.store',
             type:'POST',
-            data:[_token: CRF_TOKEN, name, psgCode],
+            data:[_token: CSRF_TOKEN, 
+                name:name, 
+                psgCode:psgCode],
 
             success:function(data) {
 
@@ -104,9 +106,9 @@
             error:function(data){
 
                 var errors = data.responseJSON;
-                if($.isEmptObject(errors)== false){
-                    $.each(errors.error, function(key, value){
-                        var errorID = '#' + key + 'Error';
+                if($.isEmptyObject(errors)== false){
+                    $.each(errors.errors, function(key, value){
+                        var ErrorID = '#' + key + 'Error';
                         $(ErrorID).removeClass("d-none");
                         $(ErrorID).text(value)
                     })
@@ -117,4 +119,3 @@
     }
                
 </script>
-

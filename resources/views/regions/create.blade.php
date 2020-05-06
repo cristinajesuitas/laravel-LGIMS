@@ -13,7 +13,7 @@
 
         <div class="modal-content">
 
-        <div class="alert alert-danger" style="display:none"></div>
+        
 
             <div class="modal-header bg-info">
 
@@ -28,13 +28,23 @@
             </div>
 
                 <div class="modal-body">
-
+                
                         <div class="form-group row">
 
                             <label for="name" class="col-sm-3 col-form-label">Region:</label>
 
                             <div class="col-sm-9">  
-                                <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}">
+                                <input type="text" 
+                                class="form-control @error('name') is-invalid @enderror" 
+                                name="name" 
+                                id="name" 
+                                value="{{ old('name') }}">
+
+                                @error('name')
+
+                                <div class="help invalid-feedback" id="nameError">{{ $errors->first('name') }}</div>
+
+                                @enderror
 
                             </div>
                                        
@@ -45,9 +55,19 @@
                             <label for="psgcCode" class="col-sm-3 col-form-label">PSG Code:</label>
 
                             <div class="col-sm-9"> 
-                               <input type="text" class="form-control" name="psgCode" id="psgCode" value="{{ old('psgCode') }}">
+                               <input type="text" 
+                               class="form-control @error('psgCode') is-invalid @enderror" 
+                               name="psgCode" 
+                               id="psgCode" 
+                               value="{{ old('psgCode') }}">
 
-                             </div>
+                               @error('psgCode')
+
+                               <div class="help invalid-feedback" id="psgCodeError">{{ $message }}</div>
+
+                               @enderror
+
+                            </div>
                             
                         </div>
 
@@ -55,51 +75,22 @@
 
                     <div class="modal-footer bg-light">
 
-                        <button type="submit" class="btn btn-primary" id="submitAddRegion">Submit</button>
+                        <button type="submit" class="btn btn-primary" >Submit</button>
 
                     </div>
-
-                    </form>
+                </div>
 
         </div>
 
-    </div>
+    </form>  
 
 </div>
+@if (count($errors) > 0)
 <script>
-jQuery(document).ready(function(){
-            jQuery('#submitAddRegion').click(function(e){
-               e.preventDefault();
-               $.ajaxSetup({
-                  headers: {
-                      'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                  }
-              });
-               jQuery.ajax({
-                  url: "{{ url('/psgc') }}",
-                  method: 'POST',
-                  data: {
-                     name: jQuery('#name').val(),
-                     psgCode: jQuery('#psgCode').val(),
-                  },
-                  success: function(result){
-                  	if(result.errors)
-                  	{
-                  		jQuery('.alert-danger').html('');
+      $( document ).ready(function() {  
+        $('#addRegionModal').modal('show');
+      });
+</script>
+@endif
 
-                  		jQuery.each(result.errors, function(key, value){
-                  			jQuery('.alert-danger').show();
-                  			jQuery('.alert-danger').append('<li>'+value+'</li>');
-                  		});
-                  	}
-                  	else
-                  	{
-                  		jQuery('.alert-danger').hide();
-                  		$('#open').hide();
-                  		$('#addRegionModal').modal('hide');
-                  	}
-                  }});
-               });
-            });
-      </script>
 

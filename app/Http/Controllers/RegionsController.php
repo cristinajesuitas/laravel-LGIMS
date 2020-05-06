@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\Region;
 
 class RegionsController extends Controller
@@ -61,38 +62,24 @@ class RegionsController extends Controller
         /* create a new geocode using the request data
         */
 		
-        
+       Region::create($this->validateRegion());
 
-        If ($this->fails())
-        {
-            return response()->json(['errors'=>$this->errors()->all()]);
-        }
-       
-        Region::create($this->validateRegion());
-
-        return response()->json(['success'=>'Data is successfully added']);
-    }
-        
-        //return redirect('psgc');
+     return redirect('psgc');
     
 		
-		// and then redirect to the home page
-		
-       
+        // and then redirect to the home page
         
     }
-
- 
-    /**
+	/**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Region  $region
      * @return \Illuminate\Http\Response
      */
 
-    /* public function edit(Region $region)
+     public function edit(Region $region)
     {
-         return redirect('psgc');
+       // return view('/psgc',['region'=>$region]);
     }
 
     /**
@@ -105,16 +92,16 @@ class RegionsController extends Controller
 
     public function update(Request $request, Region $region)
     {
-        Region::update($this->validateRegion());
+        $region->update($this->validateRegion());
         
-        return redirect('psgc');
+        return redirect('psgc',['region'=>$region]);
     }
 
     public function validateRegion()
     {
         return request()->validate([
 			'name'		=>	['required','max:255','regex:/\D+$/','unique:regions'],
-			'psgCode' 	=>	['required','regex:/\d{9}/','unique:regions']
+			'psgCode' 	=>	['required','regex:/\d{9}/',Rule::unique('regions')->ignore(request('region')) ],
 			]);
     }
 

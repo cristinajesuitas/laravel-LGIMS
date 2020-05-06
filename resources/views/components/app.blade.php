@@ -53,7 +53,7 @@ body {
 						<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Setup</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="/lguprofiles">LGU Profiles</a>
+						<a class="dropdown-item" href="/regions">LGU Profiles</a>
 						<a class="dropdown-item" href="/psgc">Philippine Standard Geographic Code</a>
 						<a class="dropdown-item" href="/usermanagement">User Management</a>
 						<a class="dropdown-item" href="#">Officials</a>

@@ -34,12 +34,17 @@ Auth::routes();
 
 Route::get('home', 'HomeController@index');
 
+Route::get('regions','RegionsController@index');
+Route::get('regions/{{$region->id}}/edit','RegionsController@edit')->name('regions.edit');
+
 /*PSGC*/
 
 Route::get('psgc', 'RegionsController@index')->name('regions.index');
-Route::post('psgc','RegionsController@store');
-//Route::put('psgc','RegionsController@update');
-//Route::get('psgc/{region}','RegionsController@show');
+//Route::resource('/psgc','RegionsController@edit')->name('regions.edit');
+Route::post('psgc','RegionsController@store')->name('regions.store');
+Route::put('psgc','RegionsController@update')->name('regions.update');
+//Route::get('psgc/{region}','RegionsController@show')->name('regions.show');
+//Route::get('psgc/{region}/edit','RegionsController@edit')->name('regions.edit');
 //Route::get('psgc','RegionsController@create');
 
 
