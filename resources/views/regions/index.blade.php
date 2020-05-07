@@ -23,7 +23,7 @@
 									<td>{{ $region->id }}</td>
 									<td>{{ $region->name }}</td>
 									<td>{{ $region->psgCode }}</td>
-									<td><a href="/regions/{{$region->id}}/edit" class = "btn btn-info">Edit</a></td></td>
+									<td>@include('regions.edit')</td>
 								</tr>
 
 							@endforeach

@@ -23,7 +23,8 @@ class RegionsController extends Controller
 		return view('psgc.index',['regions' => $regions ]);
     }
 
-         /**
+
+        /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -33,20 +34,8 @@ class RegionsController extends Controller
     {
         // Shows a view to create a new resource
 
-                 
-
-    }
-
-      /**
-     * Display the specified resource.
-     *
-     * @param  \App\Region  $region
-     * @return \Illuminate\Http\Response
-     */
-
-    public function show(Region $region)
-    {
-        return view('regions.show',['region'=>$region]);
+    
+        
     }
 
     /**
@@ -70,6 +59,19 @@ class RegionsController extends Controller
         // and then redirect to the home page
         
     }
+
+      /**
+     * Display the specified resource.
+     *
+     * @param  \App\Region  $region
+     * @return \Illuminate\Http\Response
+     */
+
+    public function show(Region $region)
+    {
+        return view('regions.show',['region'=>$region]);
+    }
+    
 	/**
      * Show the form for editing the specified resource.
      *
@@ -79,7 +81,7 @@ class RegionsController extends Controller
 
      public function edit(Region $region)
     {
-       // return view('/psgc',['region'=>$region]);
+       return view('regions/{region}/edit',['region'=>$region]);
     }
 
     /**
@@ -97,14 +99,6 @@ class RegionsController extends Controller
         return redirect('psgc',['region'=>$region]);
     }
 
-    public function validateRegion()
-    {
-        return request()->validate([
-			'name'		=>	['required','max:255','regex:/\D+$/','unique:regions'],
-			'psgCode' 	=>	['required','regex:/\d{9}/',Rule::unique('regions')->ignore(request('region')) ],
-			]);
-    }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -115,4 +109,13 @@ class RegionsController extends Controller
     {
         //
     }
+
+    public function validateRegion()
+    {
+        return request()->validate([
+			'name'		=>	['required','max:255','regex:/\D+$/','unique:regions'],
+			'psgCode' 	=>	['required','regex:/\d{9}/',Rule::unique('regions')->ignore(request('region')) ],
+			]);
+    }
+
 }

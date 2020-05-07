@@ -35,7 +35,7 @@ Auth::routes();
 Route::get('home', 'HomeController@index');
 
 Route::get('regions','RegionsController@index');
-Route::get('regions/{{$region->id}}/edit','RegionsController@edit')->name('regions.edit');
+Route::get('regions/{$region}/edit','RegionsController@edit')->name('regions.edit');
 
 /*PSGC*/
 
