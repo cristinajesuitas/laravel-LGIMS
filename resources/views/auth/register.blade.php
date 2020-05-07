@@ -1,51 +1,23 @@
-<x-app>
+@extends('layouts.app')
 
 @section('content')
-
-<div class="d-flex justify-content-center">
-	@include('includes.header')
-</div>
-
-<div class="content">
+<div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-				<div class="card-header text-center "><a class="navbar-brand" href="{{ url('/') }}">
-                   <img src="images/lgimsicon.png" width="75" height=auto class="img-fluid align-middle " alt="">
-                </a><h5 class="text-center d-inline">Local Government Information Management Systems</h5></div>
-                
+                <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-				<h5 class="text-center">Create User Account</h5>
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
-                       
-						<div class="form-group row">
-                            <label for="username" class="col-md-4 col-form-label text-md-right">{{ __('Username') }}</label>
+
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
-                                @error('username')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-						<div class="form-group row">
-                            <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
-
-                            <div class="col-md-6">
-                                <select id="role" class="form-control @error('role') is-invalid @enderror" name="role" value="{{ old('role') }}">
-									<option>Select Role</option>
-									<option value="admin">Admin</option>
-									<option value="superuser">Superuser</option>
-									<option value="user">User</option>
-								</select>
-
-                                @error('role')
+                                @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -88,38 +60,6 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
-						<div class="card border-light">
-							<div class="card-body">
-								<h6 class="card-title">User Information</h6>
-									 <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-						
-						<div class="form-group row">
-                            <label for="designation" class="col-md-4 col-form-label text-md-right">{{ __('Designation') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="designation" type="text" class="form-control @error('designation') is-invalid @enderror" name="designation" value="{{ old('designation') }}" required autocomplete="designation" >
-
-                                @error('designation')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-  </div>
-</div>
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
@@ -132,8 +72,6 @@
                 </div>
             </div>
         </div>
-	</div>
+    </div>
 </div>
-
-
-</x-app>
+@endsection

@@ -48,3 +48,7 @@ Route::put('psgc','RegionsController@update')->name('regions.update');
 //Route::get('psgc','RegionsController@create');
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
